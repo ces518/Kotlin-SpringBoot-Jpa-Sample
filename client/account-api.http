@@ -1,0 +1,36 @@
+# Account API
+
+# 목록
+GET {{host}}/accounts
+Accept: application/json
+
+###
+
+# 단건
+GET {{host}}/accounts/1
+Accept: application/json
+
+###
+
+# 등록
+POST {{host}}/accounts
+Content-Type: application/json
+
+{
+  "name": "ncucu"
+}
+
+###
+
+# 수정
+PUT {{host}}/accounts/1
+Content-Type: application/json
+
+{
+  "name": "ncucu2"
+}
+
+###
+
+# 삭제
+DELETE {{host}}/accounts/1

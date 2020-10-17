@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
     kotlin("plugin.jpa") version "1.3.72"
+    kotlin("kapt") version "1.3.72"
 }
 
 group = "kotlin.springboot"
@@ -27,6 +28,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
+
+    implementation("org.mapstruct:mapstruct:1.4.1.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.4.1.Final")
 }
 
 tasks.withType<Test> {
@@ -39,12 +43,6 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "11"
     }
 }
-
-plugins {
-    id "org.jetbrains.kotlin.plugin.jpa" version "1.3.61"
-    id "org.jetbrains.kotlin.plugin.allopen" version "1.3.61"
-}
-
 
 allOpen {
     annotation("javax.persistence.Entity")
