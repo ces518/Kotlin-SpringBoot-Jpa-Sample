@@ -1,0 +1,5 @@
+# Account API
+
+# 목록
+GET {{host}}/sample
+Accept: application/json

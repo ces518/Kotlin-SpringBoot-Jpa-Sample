@@ -5,8 +5,20 @@ spring:
       hibernate:
         format_sql: true
 
+
 logging:
   level:
     org:
       hibernate:
         type: trace
+    me:
+      springboot:
+        jpa:
+          client: debug
+feign:
+  client:
+    config:
+      default:
+        connectionTimeout: 3000
+        readTimeout: 3000
+        loggerLevel: HEADERS
