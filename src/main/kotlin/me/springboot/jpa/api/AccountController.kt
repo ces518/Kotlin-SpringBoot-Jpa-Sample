@@ -3,6 +3,7 @@ package me.springboot.jpa.api
 import me.springboot.jpa.mapper.AccountMapper
 import me.springboot.jpa.repository.AccountRepository
 import me.springboot.jpa.service.AccountService
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -18,6 +19,7 @@ class AccountController(
                 .map(accountMapper::entityToView)
 
     @GetMapping("/accounts/{id}")
+    @Cacheable(value = ["getAccount"], key = "#id")
     fun getAccount(@PathVariable id: Long) : AccountView =
         accountService.findAccount(id)
                 .let(accountMapper::entityToView)
