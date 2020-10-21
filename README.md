@@ -44,3 +44,11 @@ allOpen {
 > 대부분 해당 그래프에 맞는 쿼리 메소드를 만들어서 사용하거나, @EntityGraph 등을 사용했었다..
 
 - 우선은 샘플 코드이기 떄문에 전자로 먼저 진행해보기로 결정
+
+### 이슈
+- Spring Redis CacheManager 사용시 두가지 방법 존재
+- 1. 객체를 그대로 Redis 에 저장한다.
+    - Spring Boot Default 설정 사용시 문제 없음
+    - Serialize 대상 객체는 Serializable 인터페이스를 구현해야함
+- 2. JSON 형태로 변환하여 Redis 에 저장한다.
+    - Custom 설정이 필요하며, 현재 DeSerialize 할때 예외 발생..
