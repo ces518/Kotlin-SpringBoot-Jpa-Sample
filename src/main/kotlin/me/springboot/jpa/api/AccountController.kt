@@ -5,6 +5,7 @@ import me.springboot.jpa.repository.AccountRepository
 import me.springboot.jpa.service.AccountService
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
+import java.io.Serializable
 
 @RestController
 class AccountController(
@@ -45,7 +46,7 @@ class AccountController(
 data class AccountView (
     val id: Long,
     val name: String
-)
+): Serializable
 
 data class AccountCreateRequest(
     val name: String
