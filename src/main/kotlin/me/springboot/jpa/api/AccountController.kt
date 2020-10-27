@@ -1,6 +1,7 @@
 package me.springboot.jpa.api
 
 import me.springboot.jpa.mapper.AccountMapper
+import me.springboot.jpa.repository.AccountQueryRepository
 import me.springboot.jpa.repository.AccountRepository
 import me.springboot.jpa.service.AccountService
 import org.springframework.cache.annotation.Cacheable
@@ -11,6 +12,7 @@ import java.io.Serializable
 class AccountController(
         private val accountRepository: AccountRepository,
         private val accountService: AccountService,
+        private val accountQueryRepository: AccountQueryRepository,
         private val accountMapper: AccountMapper
 ) {
 
@@ -23,6 +25,11 @@ class AccountController(
     @Cacheable(value = ["getAccount"], key = "#id")
     fun getAccount(@PathVariable id: Long) : AccountView =
         accountService.findAccount(id)
+                .let(accountMapper::entityToView)
+
+    @GetMapping("/accounts/search")
+    fun findAccount(name: String) : AccountView =
+        accountQueryRepository.findByName(name)
                 .let(accountMapper::entityToView)
 
     @PostMapping("/accounts")

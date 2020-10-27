@@ -42,6 +42,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("it.ozimov:embedded-redis:0.7.2")
     implementation("org.springframework.boot:spring-boot-starter-cache")
+    api("com.querydsl:querydsl-jpa:4.2.2")
+    kapt("com.querydsl:querydsl-apt:4.2.2:jpa")
 }
 
 tasks.withType<Test> {

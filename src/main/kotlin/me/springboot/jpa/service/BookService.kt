@@ -18,6 +18,12 @@ class BookService(
         bookRepository.findById(id).orElseThrow { RuntimeException() }
 
     @Transactional
+    fun createBook(dto: BookCreateRequest): Book {
+        val entity = bookMapper.dtoToEntity(dto)
+        return bookRepository.save(entity)
+    }
+
+    @Transactional
     fun update(id: Long, dto: BookUpdateRequest) {
         val findBook = findBook(id)
         val entity = bookMapper.dtoToEntity(dto)
@@ -26,6 +32,10 @@ class BookService(
         }
     }
 }
+
+data class BookCreateRequest(
+    val author: String
+)
 
 data class BookUpdateRequest(
     val author: String

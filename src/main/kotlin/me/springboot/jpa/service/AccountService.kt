@@ -23,16 +23,14 @@ class AccountService(
         accountRepository.save(accountMapper.dtoToEntity(dto)).id!!
 
     @Transactional
-    fun update(id: Long, dto: AccountUpdateRequest) {
-        val findAccount = findAccount(id)
+    fun update(id: Long, dto: AccountUpdateRequest) = findAccount(id).let {
         val entity = accountMapper.dtoToEntity(dto)
-        findAccount.update(entity)
+        it.update(entity)
     }
 
     @Transactional
-    fun delete(id: Long) {
-        val findAccount = findAccount(id)
-        accountRepository.delete(findAccount)
+    fun delete(id: Long) = findAccount(id).let {
+        accountRepository.delete(it)
     }
 
 }

@@ -12,6 +12,12 @@ Accept: application/json
 
 ###
 
+# 이름 검색
+GET {{host}}/accounts/search?name=ncucu
+Accept: application/json
+
+###
+
 # 등록
 POST {{host}}/accounts
 Content-Type: application/json

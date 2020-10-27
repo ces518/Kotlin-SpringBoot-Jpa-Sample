@@ -1,0 +1,24 @@
+# Account API
+
+# 목록
+GET {{host}}/books
+Accept: application/json
+
+###
+
+# 단건
+GET {{host}}/books/1
+Accept: application/json
+
+###
+
+# 등록
+POST {{host}}/books
+Content-Type: application/json
+
+{
+  "author": "ncucu"
+}
+
+###
+
