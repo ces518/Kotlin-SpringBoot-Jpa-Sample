@@ -34,7 +34,8 @@ class AccountController(
 
     @GetMapping("/accounts/created-at-before")
     fun findAccountCreatedAtBefore() =
-            accountQueryRepository.findByCreatedAtBefore(LocalDateTime.now()).map(accountMapper::entityToView)
+            accountQueryRepository.findByCreatedAtBefore(LocalDateTime.now())
+                    .map(accountMapper::entityToView)
 
     @PostMapping("/accounts")
     fun createAccount(@RequestBody dto: AccountCreateRequest) : AccountView =

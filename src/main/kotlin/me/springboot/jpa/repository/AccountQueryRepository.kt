@@ -21,4 +21,5 @@ class AccountQueryRepository: Querydsl4RepositorySupport(Account::class.java) {
                     .from(account)
                     .where(account.createdAt.before(createdAt))
                     .fetch()
+
 }
