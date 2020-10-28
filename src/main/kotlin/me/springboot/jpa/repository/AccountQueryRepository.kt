@@ -12,7 +12,7 @@ class AccountQueryRepository: Querydsl4RepositorySupport(Account::class.java) {
         queryFactory.select(account)
                 .from(account)
                 .where(account.name.eq(name))
-                .fetchOne()!!
+                .fetchOne()
 
 
 }

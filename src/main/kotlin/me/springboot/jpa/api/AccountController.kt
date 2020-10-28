@@ -28,9 +28,8 @@ class AccountController(
                 .let(accountMapper::entityToView)
 
     @GetMapping("/accounts/search")
-    fun findAccount(name: String) : AccountView =
-        accountQueryRepository.findByName(name)
-                .let(accountMapper::entityToView)
+    fun findAccount(name: String) =
+        accountQueryRepository.findByName(name)?.let(accountMapper::entityToView)
 
     @PostMapping("/accounts")
     fun createAccount(@RequestBody dto: AccountCreateRequest) : AccountView =
