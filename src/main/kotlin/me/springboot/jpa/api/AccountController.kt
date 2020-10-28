@@ -7,6 +7,7 @@ import me.springboot.jpa.service.AccountService
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import java.io.Serializable
+import java.time.LocalDateTime
 
 @RestController
 class AccountController(
@@ -18,23 +19,27 @@ class AccountController(
 
     @GetMapping("/accounts")
     fun getAccounts() : List<AccountView> =
-        accountRepository.findAll()
-                .map(accountMapper::entityToView)
+            accountRepository.findAll()
+                    .map(accountMapper::entityToView)
 
     @GetMapping("/accounts/{id}")
     @Cacheable(value = ["getAccount"], key = "#id")
     fun getAccount(@PathVariable id: Long) : AccountView =
-        accountService.findAccount(id)
-                .let(accountMapper::entityToView)
+            accountService.findAccount(id)
+                    .let(accountMapper::entityToView)
 
     @GetMapping("/accounts/search")
     fun findAccount(name: String) =
-        accountQueryRepository.findByName(name)?.let(accountMapper::entityToView)
+            accountQueryRepository.findByName(name).map(accountMapper::entityToView)
+
+    @GetMapping("/accounts/created-at-before")
+    fun findAccountCreatedAtBefore() =
+            accountQueryRepository.findByCreatedAtBefore(LocalDateTime.now()).map(accountMapper::entityToView)
 
     @PostMapping("/accounts")
     fun createAccount(@RequestBody dto: AccountCreateRequest) : AccountView =
-        accountService.findAccount(accountService.create(dto))
-                .let(accountMapper::entityToView)
+            accountService.findAccount(accountService.create(dto))
+                    .let(accountMapper::entityToView)
 
     @PutMapping("/accounts/{id}")
     fun updateAccount(@PathVariable id: Long, @RequestBody dto: AccountUpdateRequest) : AccountView {
@@ -51,7 +56,9 @@ class AccountController(
 
 data class AccountView (
     val id: Long,
-    val name: String
+    val name: String,
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime
 ): Serializable
 
 data class AccountCreateRequest(

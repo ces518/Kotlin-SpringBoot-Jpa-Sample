@@ -18,6 +18,12 @@ Accept: application/json
 
 ###
 
+# 현재 시간 이전 기준
+GET {{host}}/accounts/created-at-before
+Accept: application/json
+
+###
+
 # 등록
 POST {{host}}/accounts
 Content-Type: application/json

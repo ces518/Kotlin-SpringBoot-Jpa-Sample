@@ -4,12 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "accounts")
-class Account(name: String?) {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-        protected set
-
+class Account(name: String?): BaseEntity() {
     var name: String? = name
         protected set
 
