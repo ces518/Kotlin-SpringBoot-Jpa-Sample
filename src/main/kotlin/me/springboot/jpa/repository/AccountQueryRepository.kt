@@ -15,7 +15,7 @@ class AccountQueryRepository: Querydsl4RepositorySupport(Account::class.java) {
     fun findByName(name: String): List<Account> =
             queryFactory.select(account)
                     .from(account)
-                    .where(account.name.eq(name))
+                    .where(eqName(name))
                     .fetch()
 
 
@@ -36,4 +36,6 @@ class AccountQueryRepository: Querydsl4RepositorySupport(Account::class.java) {
                     Function { query -> query.select(account).from(account) }
             )
 
+
+    private fun eqName(name: String) = account.name.eq(name)
 }

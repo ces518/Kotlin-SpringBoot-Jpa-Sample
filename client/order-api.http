@@ -1,0 +1,11 @@
+# Order API
+
+# 주문
+POST {{host}}/orders
+Content-Type: application/json
+
+{
+  "accountId": 1,
+  "itemId": 1
+}
+
