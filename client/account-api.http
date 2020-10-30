@@ -1,7 +1,14 @@
 # Account API
 
 # 목록
-GET {{host}}/accounts
+GET {{host}}/accounts?size=10
+Accept: application/json
+
+
+###
+
+# 목록 With CountQuery
+GET {{host}}/accounts/with-count?size=10
 Accept: application/json
 
 ###

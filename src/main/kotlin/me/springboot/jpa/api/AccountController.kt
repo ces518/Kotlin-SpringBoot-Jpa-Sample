@@ -1,10 +1,13 @@
 package me.springboot.jpa.api
 
+import me.springboot.jpa.entity.Account
 import me.springboot.jpa.mapper.AccountMapper
 import me.springboot.jpa.repository.AccountQueryRepository
 import me.springboot.jpa.repository.AccountRepository
 import me.springboot.jpa.service.AccountService
 import org.springframework.cache.annotation.Cacheable
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.*
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -18,9 +21,15 @@ class AccountController(
 ) {
 
     @GetMapping("/accounts")
-    fun getAccounts() : List<AccountView> =
-            accountRepository.findAll()
+    fun getAccounts(pageable: Pageable) : Page<AccountView> =
+            accountQueryRepository.findAll(pageable)
                     .map(accountMapper::entityToView)
+
+    @GetMapping("/accounts/with-count")
+    fun getAccountsWithCountQuery(pageable: Pageable) : Page<AccountView> =
+            accountQueryRepository.findAllWithCountQuery(pageable)
+                    .map(accountMapper::entityToView)
+
 
     @GetMapping("/accounts/{id}")
     @Cacheable(value = ["getAccount"], key = "#id")
